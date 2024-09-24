@@ -17,4 +17,10 @@ public class Bibliotecario extends Persona {
         this.salario = salario;
     }
 
+    @Override
+    public String toString() {
+        return "Bibliotecario ["+ super.toString() + "salario=" + salario + "]";
+
+    }
+    
 }

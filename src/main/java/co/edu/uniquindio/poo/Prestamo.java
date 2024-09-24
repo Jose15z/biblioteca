@@ -11,14 +11,15 @@ public class Prestamo {
     private LocalDate fechaPrestamo;
     private LocalDate fechaEntrega;
     private double costo;
-    private Collection<Libro> librosPrestados;
-    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costo){
+    private String codigo;
+    private Collection<DetallePrestamo> detallePrestamos;
+    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costo, String codigo){
         this.estudiante = estudiante;
         this.bibliotecarioAux = bibliotecarioAux; 
         this.fechaPrestamo = fechaPrestamo;
         this.fechaEntrega = fechaEntrega;
         this.costo = costo;
-        librosPrestados = new LinkedList<>();
+        detallePrestamos = new LinkedList<>();
     }
     public Estudiante getEstudiante() {
         return estudiante;
@@ -50,11 +51,24 @@ public class Prestamo {
     public void setCosto(double costo) {
         this.costo = costo;
     }
-    public Collection<Libro> getLibrosPrestados() {
-        return librosPrestados;
+    
+    public String getCodigo() {
+        return codigo;
     }
-    public void setLibrosPrestados(Collection<Libro> librosPrestados) {
-        this.librosPrestados = librosPrestados;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    public Collection<DetallePrestamo> getDetallePrestamos() {
+        return detallePrestamos;
+    }
+    public void setDetallePrestamos(Collection<DetallePrestamo> detallePrestamos) {
+        this.detallePrestamos = detallePrestamos;
+    }
+    @Override
+    public String toString() {
+        return "Prestamo [estudiante=" + estudiante + ", fechaPrestamo=" + fechaPrestamo + ", fechaEntrega="
+                + fechaEntrega + ", costo=" + costo + ", codigo=" + codigo + ", detallePrestamos=" + detallePrestamos
+                + "]";
     }
     
 }
