@@ -1,16 +1,19 @@
 package co.edu.uniquindio.poo;
 
 public class Persona {
+
     private String nombre;
     private String cedula;
     private String telefono;
     private String correo;
+
     public Persona(String nombre, String cedula, String telefono, String correo){
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
         this.correo = correo;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -37,8 +40,7 @@ public class Persona {
     }
     @Override
     public String toString() {
-        return "Persona [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo=" + correo
-                + "]";
+        return "Persona [Nombre = " + nombre + ", cedula = " + cedula + ", telefono = " + telefono + ", correo = " + correo + "]";
     }
     
 }

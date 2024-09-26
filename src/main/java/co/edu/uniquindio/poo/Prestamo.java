@@ -10,17 +10,19 @@ public class Prestamo {
     private Bibliotecario bibliotecarioAux;
     private LocalDate fechaPrestamo;
     private LocalDate fechaEntrega;
-    private double costoDia;
+    private double costo;
     private String codigo;
     private Collection<DetallePrestamo> detallePrestamos;
+
     public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costoDia, String codigo){
         this.estudiante = estudiante;
         this.bibliotecarioAux = bibliotecarioAux; 
         this.fechaPrestamo = fechaPrestamo;
         this.fechaEntrega = fechaEntrega;
-        this.costoDia = costoDia;
+        this.costo = costoDia;
         detallePrestamos = new LinkedList<>();
     }
+
     public Estudiante getEstudiante() {
         return estudiante;
     }
@@ -46,10 +48,10 @@ public class Prestamo {
         this.fechaEntrega = fechaEntrega;
     }
     public double getCosto() {
-        return costoDia;
+        return costo;
     }
     public void setCosto(double costo) {
-        this.costoDia = costo;
+        this.costo = costo;
     }
     
     public String getCodigo() {
@@ -64,17 +66,19 @@ public class Prestamo {
     public void setDetallePrestamos(Collection<DetallePrestamo> detallePrestamos) {
         this.detallePrestamos = detallePrestamos;
     }
+    public void determinarCosto(){
+        double costoFinal = 0;
+        int cantidadDias = fechaEntrega.until(fechaPrestamo).getDays();
+        for(DetallePrestamo detallePrestamo : detallePrestamos){
+            costoFinal += detallePrestamo.calcularSubtotal() * cantidadDias;
+        }
+        setCosto(costoFinal);
+    }
     @Override
     public String toString() {
-        return "Prestamo [estudiante=" + estudiante + ", fechaPrestamo=" + fechaPrestamo + ", fechaEntrega="
-                + fechaEntrega + ", costo=" + costoDia + ", codigo=" + codigo + ", detallePrestamos=" + detallePrestamos
-                + "]";
-    }
-    public void determinarCosto(){
-       int cantidadDias = fechaEntrega.until(fechaPrestamo).getDays();
-        for(DetallePrestamo detallePrestamo : detallePrestamos){
-            detallePrestamo.setSubtotal(costoDia * cantidadDias);
-        }
+        return "Prestamo [Estudiante = " + estudiante + ", fecha cuando se hizo el prestamo = " + fechaPrestamo +  
+        ", fecha de entrega de materiales = " + fechaEntrega + ", costo = " + costo + ", codigo = " 
+        + codigo + ", detalle de prestamos = " + detallePrestamos+ "]";
     }
     
 }

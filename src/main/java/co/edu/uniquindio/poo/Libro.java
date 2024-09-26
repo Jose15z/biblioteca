@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo;
 import java.time.LocalDate;
 
 public class Libro {
+
     private String titulo; 
     private String codigo;
     private String isbn;
@@ -11,8 +12,9 @@ public class Libro {
     private LocalDate fechaPublicacion;
     private boolean estado;
     private int unidadesDisponibles;
+    private double valor;
 
-    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, boolean estado, int unidadesDisponibles){
+    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, boolean estado, int unidadesDisponibles, double valor){
         this.titulo = titulo;
         this.codigo = codigo;
         this.isbn = isbn;
@@ -20,6 +22,7 @@ public class Libro {
         this.editorial = editorial;
         this.fechaPublicacion = fechaPublicacion;
         this.estado = estado;
+        this.valor = valor;
      }
 
     public String getTitulo() {
@@ -85,6 +88,20 @@ public class Libro {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    @Override
+    public String toString() {
+        return "Libro [Titulo = " + titulo + ", codigo = " + codigo + ", isbn = " + isbn + ", autor = " + autor + 
+        ", editorial = " + editorial + ", fecha de publicación = " + fechaPublicacion + ", estado = " + estado + 
+        ", unidades disponibles  = " + unidadesDisponibles + ", valor = " + valor + "]";
     }
      
 }
