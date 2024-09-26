@@ -10,15 +10,15 @@ public class Prestamo {
     private Bibliotecario bibliotecarioAux;
     private LocalDate fechaPrestamo;
     private LocalDate fechaEntrega;
-    private double costo;
+    private double costoDia;
     private String codigo;
     private Collection<DetallePrestamo> detallePrestamos;
-    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costo, String codigo){
+    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costoDia, String codigo){
         this.estudiante = estudiante;
         this.bibliotecarioAux = bibliotecarioAux; 
         this.fechaPrestamo = fechaPrestamo;
         this.fechaEntrega = fechaEntrega;
-        this.costo = costo;
+        this.costoDia = costoDia;
         detallePrestamos = new LinkedList<>();
     }
     public Estudiante getEstudiante() {
@@ -46,10 +46,10 @@ public class Prestamo {
         this.fechaEntrega = fechaEntrega;
     }
     public double getCosto() {
-        return costo;
+        return costoDia;
     }
     public void setCosto(double costo) {
-        this.costo = costo;
+        this.costoDia = costo;
     }
     
     public String getCodigo() {
@@ -67,8 +67,14 @@ public class Prestamo {
     @Override
     public String toString() {
         return "Prestamo [estudiante=" + estudiante + ", fechaPrestamo=" + fechaPrestamo + ", fechaEntrega="
-                + fechaEntrega + ", costo=" + costo + ", codigo=" + codigo + ", detallePrestamos=" + detallePrestamos
+                + fechaEntrega + ", costo=" + costoDia + ", codigo=" + codigo + ", detallePrestamos=" + detallePrestamos
                 + "]";
+    }
+    public void determinarCosto(){
+       int cantidadDias = fechaEntrega.until(fechaPrestamo).getDays();
+        for(DetallePrestamo detallePrestamo : detallePrestamos){
+            detallePrestamo.setSubtotal(costoDia * cantidadDias);
+        }
     }
     
 }

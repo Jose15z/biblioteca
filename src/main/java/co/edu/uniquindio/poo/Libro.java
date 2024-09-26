@@ -9,10 +9,10 @@ public class Libro {
     private String autor;
     private String editorial;
     private LocalDate fechaPublicacion;
-    private Estado estado;
+    private boolean estado;
     private int unidadesDisponibles;
 
-    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, Estado estado, int unidadesDisponibles){
+    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, boolean estado, int unidadesDisponibles){
         this.titulo = titulo;
         this.codigo = codigo;
         this.isbn = isbn;
@@ -70,13 +70,6 @@ public class Libro {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
 
     public int getUnidadesDisponibles() {
         return unidadesDisponibles;
@@ -84,6 +77,14 @@ public class Libro {
 
     public void setUnidadesDisponibles(int unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
      
 }
