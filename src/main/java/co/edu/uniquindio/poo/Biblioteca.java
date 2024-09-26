@@ -101,4 +101,25 @@ public class Biblioteca {
         }
         return ganacias;
     }
+
+    //un empleado gana el 20% del valor de cada préstamo que realice, más una bonificación de un 2% de este total por cada año de antigüedad que tenga.
+    public void determinarSalariosBiblotecarios(){
+        double bonificacion ;
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            bonificacion = bibliotecario.getAntiguedad() * (bibliotecario.getSalario()*0.02);
+            for (Prestamo prestamo : prestamos) {
+                if(prestamo.getBibliotecarioAux().getCedula().equals(bibliotecario.getCedula())){
+                    bonificacion += prestamo.getCosto()*0.2;
+                }
+            }
+            bibliotecario.setSalario(bibliotecario.getSalario()+bonificacion);
+        }
+    }
+    public double nominaTotalDeBibliotecarios(){
+        double totalAPagar = 0;
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            totalAPagar += bibliotecario.getSalario();
+        }
+        return totalAPagar;
+    }
 }
