@@ -102,6 +102,5 @@ public class Libro {
         return "Libro [Titulo = " + titulo + ", codigo = " + codigo + ", isbn = " + isbn + ", autor = " + autor + 
         ", editorial = " + editorial + ", fecha de publicación = " + fechaPublicacion + ", estado = " + estado + 
         ", unidades disponibles  = " + unidadesDisponibles + ", valor = " + valor + "]";
-    }
-     
+    }    
 }

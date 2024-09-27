@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo;
 
 import java.util.Collection;
-
+import javax.swing.JOptionPane;
 import java.util.LinkedList;
 
 public class Biblioteca {
@@ -22,7 +22,6 @@ public class Biblioteca {
         estudiantes = new LinkedList<>();
     }
 
-    
     public void estudianteConMasPrestamos() {
         int mayorCantidadPrestamos = 0;
         String estudianteConMasPrestamos = "";
@@ -30,8 +29,9 @@ public class Biblioteca {
             if (estudiante.getPrestamos().size() > mayorCantidadPrestamos) {
                 mayorCantidadPrestamos = estudiante.getPrestamos().size();
                 estudianteConMasPrestamos = estudiante.toString();
-        }
-        metodos.mostrarMensaje("El estudiante con mas prestamos es:\n:" + estudianteConMasPrestamos +  "\n con una cantidad de "+ mayorCantidadPrestamos + " prestamos");   
+            }
+            metodos.mostrarMensaje("El estudiante con mas prestamos es:\n:" + estudianteConMasPrestamos
+                    + "\n con una cantidad de " + mayorCantidadPrestamos + " prestamos");
         }
     }
 
@@ -43,37 +43,77 @@ public class Biblioteca {
         return ganacias;
     }
 
-    //un empleado gana el 20% del valor de cada préstamo que realice, más una bonificación de un 2% de este total por cada año de antigüedad que tenga.
-    public void determinarSalariosBiblotecarios(){
-        double bonificacion ;
+    // un empleado gana el 20% del valor de cada préstamo que realice, más una
+    // bonificación de un 2% de este total por cada año de antigüedad que tenga.
+    public void determinarSalariosBiblotecarios() {
+        double bonificacion;
         for (Bibliotecario bibliotecario : bibliotecarios) {
-            bonificacion = bibliotecario.getAntiguedad() * (bibliotecario.getSalario()*0.02);
+            bonificacion = bibliotecario.getAntiguedad() * (bibliotecario.getSalario() * 0.02);
             for (Prestamo prestamo : prestamos) {
-                if(prestamo.getBibliotecarioAux().getCedula().equals(bibliotecario.getCedula())){
-                    bonificacion += prestamo.getCosto()*0.2;
+                if (prestamo.getBibliotecarioAux().getCedula().equals(bibliotecario.getCedula())) {
+                    bonificacion += prestamo.getCosto() * 0.2;
                 }
             }
-            bibliotecario.setSalario(bibliotecario.getSalario()+bonificacion);
+            bibliotecario.setSalario(bibliotecario.getSalario() + bonificacion);
         }
     }
-    public double nominaTotalDeBibliotecarios(){
+
+    public double nominaTotalDeBibliotecarios() {
         double totalAPagar = 0;
         for (Bibliotecario bibliotecario : bibliotecarios) {
             totalAPagar += bibliotecario.getSalario();
         }
         return totalAPagar;
     }
-    public int unidadesLibroEnPrestamos(String titulo){
+
+    public int unidadesLibroEnPrestamos(String titulo) {
         int catidadPrestamos = 0;
         for (Prestamo prestamo : prestamos) {
-            for(DetallePrestamo detallePrestamo: prestamo.getDetallePrestamos()){
-                if (detallePrestamo.getLibro().getTitulo().equals(titulo)){
+            for (DetallePrestamo detallePrestamo : prestamo.getDetallePrestamos()) {
+                if (detallePrestamo.getLibro().getTitulo().equals(titulo)) {
                     catidadPrestamos += 1;
                 }
             }
         }
         return catidadPrestamos;
     }
+
+    public void eliminarlibro() {
+        String codigoABuscar = metodos.ingresarStringMensaje("Ingrese el codigo del libro que desea eliminar");
+        for (Libro libro : libros) {
+            if(libro.getCodigo().equals(codigoABuscar)){
+                libros.remove(libro);
+            }
+        }
+    }
+
+    public void ingresarLibros() {
+        boolean centinela = true;
+        while (centinela) {
+            libros.add(metodos.ingresarLibro());
+            int respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea Ingresar Otro Libro?",
+                    "Confirmar",
+                    JOptionPane.YES_NO_OPTION);
+            centinela = (respuesta == JOptionPane.YES_OPTION);
+        }
+    }
+    
+    public void mostrarUnPrestamo(){
+        String codigoPrestamoABuscar = metodos.ingresarStringMensaje("Ingrese el codigo del prestamo que desea mostrar");
+         boolean noSeEncuentra = true;
+        for (Prestamo prestamo : prestamos) {
+            if(prestamo.getCodigo().equals(codigoPrestamoABuscar)){
+                metodos.mostrarMensaje(prestamo.toString());
+                noSeEncuentra = false;
+            }
+        }
+        if(noSeEncuentra){
+            metodos.mostrarMensaje("Libro no encontrado");
+        }
+    }
+
     public String getNombre() {
         return nombre;
     }

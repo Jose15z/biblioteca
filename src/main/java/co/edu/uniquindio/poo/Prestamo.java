@@ -74,6 +74,7 @@ public class Prestamo {
         }
         setCosto(costoFinal);
     }
+    
     @Override
     public String toString() {
         return "Prestamo [Estudiante = " + estudiante + ", fecha cuando se hizo el prestamo = " + fechaPrestamo +  
