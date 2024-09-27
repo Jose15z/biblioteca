@@ -1,5 +1,5 @@
 package co.edu.uniquindio.poo;
-
+import java.time.LocalDate;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import java.util.LinkedList;
@@ -34,7 +34,54 @@ public class Biblioteca {
                     + "\n con una cantidad de " + mayorCantidadPrestamos + " prestamos");
         }
     }
-
+    public void verEstudiante(){
+        String idEstudianteABuscar = metodos.ingresarStringMensaje("Ingrese el id del estudiante que desea ver");
+        boolean estudianteNoEncontrado = true;
+        for(Estudiante estudiante: estudiantes){
+            if(estudiante.getCedula().equals(idEstudianteABuscar)){
+                metodos.mostrarMensaje(estudiante.toString());
+                estudianteNoEncontrado = false;
+            }
+        }
+        if (estudianteNoEncontrado){
+            metodos.mostrarMensaje("Estudiante no encontrado");
+        }
+    }
+    public boolean verificarEstudiante(String id){
+        boolean estaEstudiante = false;
+        for (Estudiante estudiante : estudiantes) {
+            if(estudiante.getCedula().equals(id)){
+                estaEstudiante = true;
+            }
+        }
+        return estaEstudiante;
+    }
+    public Estudiante ingresarEstudiante(){
+        String nombreEstudiante = metodos.ingresarStringMensaje("Ingrese el nombre del nuevo estudiante");
+        String id = metodos.ingresarStringMensaje("Ingrese el numero de cedula de " + nombreEstudiante);
+        String correo = metodos.ingresarStringMensaje("Ingrese el correo de " + nombreEstudiante);
+        int edad = metodos.ingresarEntero("Ingrese la edad de " + nombreEstudiante);
+        Estudiante estudiante =  new Estudiante(nombreEstudiante, id, correo, edad);
+        return estudiante;
+    }
+    public void ingresarEstudiantes(){
+        
+        boolean centinela = true;
+        while (centinela) {
+            Estudiante estudiante = ingresarEstudiante(); 
+            if(!verificarEstudiante(estudiante.getCedula())){
+                estudiantes.add(estudiante);
+            }
+            int respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea Ingresar Otro Estudiante?",
+                    "Confirmar",
+                    JOptionPane.YES_NO_OPTION);
+                    if(respuesta == JOptionPane.NO_OPTION){
+                        centinela = false;
+                    }
+        }
+    }
     public int determinarGanancias() {
         int ganacias = 0;
         for (Prestamo prestamo : prestamos) {
@@ -77,6 +124,7 @@ public class Biblioteca {
         }
         return catidadPrestamos;
     }
+   
 
     public void eliminarlibro() {
         String codigoABuscar = metodos.ingresarStringMensaje("Ingrese el codigo del libro que desea eliminar");
@@ -86,17 +134,36 @@ public class Biblioteca {
             }
         }
     }
+    public Libro ingresarLibro(){
+
+        String titulo = metodos.ingresarStringMensaje("Ingrese el titullo de libro"); 
+        String codigo = metodos.ingresarStringMensaje("Ingrese el codigo de el libro " + titulo);
+        String isbn = metodos.ingresarStringMensaje("Ingrese el isbn de el libro " + titulo);
+        String autor = metodos.ingresarStringMensaje("Ingrese el autor de el libro " + titulo);
+        String editorial = metodos.ingresarStringMensaje("Ingrese la editorial de el libro " + titulo);
+        LocalDate fechaPublicacion = metodos.ingresarFecha("Ingrese la fecha de publicacion del libro");
+        boolean estado = metodos.ingresarEstado();
+        int unidadesDisponibles = 0;
+        if(estado){
+            metodos.ingresarEntero("Ingrese la cantidad de unidades disponibles");
+        }
+        double valor = metodos.ingresarDouble("Ingrese el valor del libro");
+        Libro libro = new Libro(titulo, codigo, isbn, autor, editorial, fechaPublicacion, estado, unidadesDisponibles, valor);
+        return libro;
+    }
 
     public void ingresarLibros() {
         boolean centinela = true;
         while (centinela) {
-            libros.add(metodos.ingresarLibro());
+            libros.add(ingresarLibro());
             int respuesta = JOptionPane.showConfirmDialog(
                     null,
                     "¿Desea Ingresar Otro Libro?",
                     "Confirmar",
                     JOptionPane.YES_NO_OPTION);
-            centinela = (respuesta == JOptionPane.YES_OPTION);
+            if(respuesta == JOptionPane.NO_OPTION){
+                centinela = false;
+            }
         }
     }
     

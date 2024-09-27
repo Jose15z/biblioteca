@@ -68,23 +68,8 @@ public class Modulo {
     }
 
 
-    public Libro ingresarLibro(){
-
-        String titulo = ingresarStringMensaje("Ingrese el titullo de libro"); 
-        String codigo = ingresarStringMensaje("Ingrese el codigo de el libro " + titulo);
-        String isbn = ingresarStringMensaje("Ingrese el isbn de el libro " + titulo);
-        String autor = ingresarStringMensaje("Ingrese el autor de el libro " + titulo);
-        String editorial = ingresarStringMensaje("Ingrese la editorial de el libro " + titulo);
-        LocalDate fechaPublicacion = ingresarFecha("Ingrese la fecha de publicacion del libro");
-        boolean estado = ingresarEstado();
-        int unidadesDisponibles = 0;
-        if(estado){
-            ingresarEntero("Ingrese la cantidad de unidades disponibles");
-        }
-        double valor = ingresarDouble("Ingrese el valor del libro");
-        Libro libro = new Libro(titulo, codigo, isbn, autor, editorial, fechaPublicacion, estado, unidadesDisponibles, valor);
-        return libro;
-    }
+    
+   
 
 
     

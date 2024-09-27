@@ -9,7 +9,7 @@ public class InterfazApp {
             case "Prestamo":
                 interfaz.manejarPrestamos(biblioteca);
             case "Estudiantes":
-
+                interfaz.manejarEstudiantes(biblioteca);
             case "Bibliotecarios":
 
         
@@ -56,9 +56,9 @@ public class InterfazApp {
                     metodos.mostrarMensaje(estudiante.toString() + "\n");
                 }
             case "Ver Estudiante":
-
+                biblioteca.verEstudiante();
             case "Agregar Estudiante": 
-
+                biblioteca.ingresarEstudiantes();
             case "Eliminar Estudiante": 
 
             case "Ver Estudiante Con Mas Prestamos":
