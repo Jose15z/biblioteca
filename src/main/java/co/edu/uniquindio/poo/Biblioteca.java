@@ -173,20 +173,36 @@ public class Biblioteca {
     }
     // un empleado gana el 20% del valor de cada préstamo que realice, más una
     // bonificación de un 2% de este total por cada año de antigüedad que tenga.
-    public void determinarSalarioBiblotecario(Bibliotecario bibliotecario) {
-            double bonificacion = bibliotecario.getAntiguedad() * (bibliotecario.getSalario() * 0.02);
+    public double determinarSalarioBiblotecario(Bibliotecario bibliotecario) {
+        double bonificacion = bibliotecario.getAntiguedad() * (bibliotecario.getSalario() * 0.02);
+        double salarioFinal = 0;
             for (Prestamo prestamo : prestamos) {
                 if (prestamo.getBibliotecarioAux().getCedula().equals(bibliotecario.getCedula())) {
                     bonificacion += prestamo.getCosto() * 0.2;
                 }
-                bibliotecario.setSalario(bibliotecario.getSalario() + bonificacion);
+                salarioFinal = (bibliotecario.getSalario() + bonificacion);
         }
+        return salarioFinal;
+    }
+
+    public void verSalarioBibliotecario(){
+        String idBibliotecarioAbuscar = metodos.ingresarStringMensaje("Ingrese el id de el bibliotecario que desea encontrar");
+        double salarioBibliotecario;
+        boolean bibliotecarioNoEncontrado = true;
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            if(bibliotecario.getCedula().equals(idBibliotecarioAbuscar)){
+                salarioBibliotecario = determinarSalarioBiblotecario(bibliotecario);
+                metodos.mostrarMensaje("El salario del bibliotecario " + bibliotecario.getNombre() + "es de " + salarioBibliotecario);
+                bibliotecarioNoEncontrado = false;
+            }
+        }
+        if(bibliotecarioNoEncontrado){metodos.mostrarMensaje("Bibliotecario no encontrado");}
     }
 
     public double nominaTotalDeBibliotecarios() {
         double totalAPagar = 0;
         for (Bibliotecario bibliotecario : bibliotecarios) {
-            totalAPagar += bibliotecario.getSalario();
+            totalAPagar += determinarSalarioBiblotecario(bibliotecario);
         }
         return totalAPagar;
     }
@@ -214,12 +230,12 @@ public class Biblioteca {
 
     public Libro ingresarLibro() {
 
-        String titulo = metodos.ingresarStringMensaje("Ingrese el titullo de libro");
+        String titulo = metodos.ingresarStringMensaje("Ingrese el titulo de libro");
         String codigo = metodos.ingresarStringMensaje("Ingrese el codigo de el libro " + titulo);
         String isbn = metodos.ingresarStringMensaje("Ingrese el isbn de el libro " + titulo);
         String autor = metodos.ingresarStringMensaje("Ingrese el autor de el libro " + titulo);
         String editorial = metodos.ingresarStringMensaje("Ingrese la editorial de el libro " + titulo);
-        LocalDate fechaPublicacion = metodos.ingresarFecha("Ingrese la fecha de publicacion del libro");
+        LocalDate fechaPublicacion = metodos.ingresarFecha("Ingrese la fecha de publicacion del libro" + titulo);
         boolean estado = metodos.ingresarEstado();
         int unidadesDisponibles = 0;
         if (estado) {
@@ -259,6 +275,87 @@ public class Biblioteca {
         if (noSeEncuentra) {
             metodos.mostrarMensaje("Libro no encontrado");
         }
+    }
+
+    public DetallePrestamo ingresarDetallePrestamo(){
+        int cantidad = metodos.ingresarEntero("Ingrese la cantidad de prestamos que desea ingresar");
+        String tituloLibro = metodos.ingresarStringMensaje("Ingrese el titulo del libro que desea prestar");
+        Libro libroSeleccionado = null;
+        for(Libro libro: libros){
+            if(libro.getTitulo().equals(tituloLibro) && libro.isEstado() && libro.getUnidadesDisponibles() >= cantidad){
+                libroSeleccionado = libro;
+                libro.setUnidadesDisponibles(libro.getUnidadesDisponibles()-cantidad);
+            }
+
+        }
+        if(libroSeleccionado != null){
+            DetallePrestamo detallePrestamo = new DetallePrestamo(cantidad, libroSeleccionado);
+            detallePrestamo.setSubtotal(detallePrestamo.calcularSubtotal());
+            return detallePrestamo;
+        }
+        else{
+            metodos.mostrarMensaje("Libro no disponible");
+            return null;
+        }
+    }
+    public boolean verificarDetallePrestamo(String titulo, Collection<DetallePrestamo> detallePrestamos){
+        boolean estaDetalle = false;
+        for(DetallePrestamo detallePrestamo: detallePrestamos){
+            if(detallePrestamo.getLibro().getTitulo().equals(titulo)){
+                estaDetalle = true;
+            }
+        }
+        return estaDetalle;
+    }
+
+    public void ingresarPrestamo(){
+        Estudiante estudiantePrestamo = null;
+        String idEstudianteABuscar = metodos.ingresarStringMensaje("Ingrese el id del estudiante que desea hacer el prestamo");
+        boolean estaEstudiante = false;
+        Bibliotecario bibliotecarioPrestamo = null;
+        String idBibliotecarioABUscar = metodos.ingresarStringMensaje("Ingrese el id del bibliotecario que desea ingresar");
+        boolean estaBibliotecario = false;
+        LocalDate fechaPrestamo;
+        LocalDate fechaEntrega;
+        String codigo;
+        Collection<DetallePrestamo> detallePrestamos = new LinkedList<>();
+        for (Estudiante estudiante : estudiantes) {
+            if(estudiante.getCedula().equals(idEstudianteABuscar)){
+                estaEstudiante = true;
+                estudiantePrestamo = estudiante;
+            }
+        }
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            if(bibliotecario.getCedula().equals(idBibliotecarioABUscar)){
+                estaBibliotecario = true;
+                bibliotecarioPrestamo = bibliotecario;
+            }
+        }
+        if (estaBibliotecario && estaEstudiante){
+            fechaPrestamo = metodos.ingresarFecha("Ingrese la fecha en la que se realiza el prestamo");
+            fechaEntrega = metodos.ingresarFecha("Ingrese la fecha en la que se va a entregar el prestamo");
+            codigo = metodos.ingresarStringMensaje("Ingrese el codigo del prestamo");
+            boolean centinela = true;
+            while (centinela) {
+                DetallePrestamo detallePrestamo = ingresarDetallePrestamo();
+                if(!verificarDetallePrestamo(detallePrestamo.getLibro().getTitulo(), detallePrestamos)){
+                    detallePrestamos.add(detallePrestamo);
+                }
+                int respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea Ingresar Otro Detalle del Prestamo?",
+                    "Confirmar",
+                    JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.NO_OPTION) {
+                centinela = false;
+                Prestamo prestamo = new Prestamo(estudiantePrestamo, bibliotecarioPrestamo, fechaPrestamo, fechaEntrega, codigo, detallePrestamos);
+                prestamos.add(prestamo);
+                
+            }
+
+            }
+        }
+        
     }
 
     public String getNombre() {

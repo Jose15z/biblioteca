@@ -2,7 +2,7 @@ package co.edu.uniquindio.poo;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.LinkedList;
+
 
 public class Prestamo {
 
@@ -14,13 +14,13 @@ public class Prestamo {
     private String codigo;
     private Collection<DetallePrestamo> detallePrestamos;
 
-    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, double costoDia, String codigo){
+    public Prestamo(Estudiante estudiante,  Bibliotecario bibliotecarioAux,  LocalDate fechaPrestamo,  LocalDate fechaEntrega, String codigo, Collection<DetallePrestamo> detallePrestamos){
         this.estudiante = estudiante;
         this.bibliotecarioAux = bibliotecarioAux; 
         this.fechaPrestamo = fechaPrestamo;
         this.fechaEntrega = fechaEntrega;
-        this.costo = costoDia;
-        detallePrestamos = new LinkedList<>();
+        this.costo = 0;
+        this.detallePrestamos = detallePrestamos;
     }
 
     public Estudiante getEstudiante() {

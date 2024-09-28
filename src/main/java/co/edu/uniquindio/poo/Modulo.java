@@ -60,12 +60,7 @@ public class Modulo {
     public void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    public void mostrarMensaje(int mensaje){
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
-    public void mostrarMensaje(double mensaje){
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
+    
 
 
     
