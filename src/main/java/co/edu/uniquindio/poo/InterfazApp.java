@@ -75,7 +75,7 @@ public class InterfazApp {
         }
     }
     public void manejarBibliotecarios(Biblioteca biblioteca){
-        String[] opciones = {"", "Ver Bibliotecarios", "Ver Bibliotecario", "Agregar Bibliotecario", "Calcular Nomina", "Obtener Sueldo"};
+        String[] opciones = {"", "Ver Bibliotecarios", "Ver Bibliotecario", "Agregar Bibliotecario", "Calcular Nomina", "Obtener Sueldo", "Eliminar bibliotecario"};
         String seleccion = (String) JOptionPane.showInputDialog(null, "Selecicone una opcion", "Gestion bibliotecarios", JOptionPane.PLAIN_MESSAGE, null,opciones,opciones[0]);
         switch (seleccion) {
             case "Ver Bibliotecarios":
@@ -89,8 +89,13 @@ public class InterfazApp {
                 biblioteca.ingresarBibliotecarios();
                 break;
             case "Calcular Nomina":
-
+                break;
             case "Obtener Sueldo":
+                break;
+
+            case "Eliminar bibliotecario":
+                biblioteca.eliminarBibliotecario();
+                break;
         }
     }
 }
