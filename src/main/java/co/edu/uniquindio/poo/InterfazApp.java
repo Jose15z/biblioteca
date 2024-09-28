@@ -6,11 +6,16 @@ public class InterfazApp {
         switch (seleccion) {
             case "Libros":
                 interfaz.manejarLibros(biblioteca);
+                break;
             case "Prestamo":
                 interfaz.manejarPrestamos(biblioteca);
+                break;
             case "Estudiantes":
                 interfaz.manejarEstudiantes(biblioteca);
+                break;
             case "Bibliotecarios":
+                interfaz.manejarBibliotecarios(biblioteca);
+                break;
 
         
         }
@@ -23,10 +28,13 @@ public class InterfazApp {
                 for(Libro libro: biblioteca.getLibros()){
                     metodos.mostrarMensaje(libro.toString() + "\n");
                     }
+                    break;
             case "Agregar Libro":
                     biblioteca.ingresarLibros();
-            case "Eliminar Libro":
+                    break;
+           case "Eliminar Libro":
                     biblioteca.eliminarlibro();
+                    break;
         }
     }
 
@@ -60,11 +68,29 @@ public class InterfazApp {
             case "Agregar Estudiante": 
                 biblioteca.ingresarEstudiantes();
             case "Eliminar Estudiante": 
-
+                biblioteca.eliminarEstudiante();
             case "Ver Estudiante Con Mas Prestamos":
                 biblioteca.estudianteConMasPrestamos();
-                
-                
+
+        }
+    }
+    public void manejarBibliotecarios(Biblioteca biblioteca){
+        String[] opciones = {"", "Ver Bibliotecarios", "Ver Bibliotecario", "Agregar Bibliotecario", "Calcular Nomina", "Obtener Sueldo"};
+        String seleccion = (String) JOptionPane.showInputDialog(null, "Selecicone una opcion", "Gestion bibliotecarios", JOptionPane.PLAIN_MESSAGE, null,opciones,opciones[0]);
+        switch (seleccion) {
+            case "Ver Bibliotecarios":
+                for (Bibliotecario bibliotecario : biblioteca.getBibliotecarios()) {
+                    metodos.mostrarMensaje(bibliotecario.toString() + "\n");
+                }
+            case "Ver Bibliotecario":
+                biblioteca.verBibliotecario();
+                break;
+            case "Agregar Bibliotecario":
+                biblioteca.ingresarBibliotecarios();
+                break;
+            case "Calcular Nomina":
+
+            case "Obtener Sueldo":
         }
     }
 }
