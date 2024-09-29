@@ -1,11 +1,11 @@
 # biblioteca
 
-Descripciín basisca de su Proyecto de POO ...
+Proyecto del programa biblioteca 
 
 # Autores
 
-- Autor 1
-- Autor 2
+- Juan José Marin Carmona
+- José Manuel Rodrigez
 
 # Herramientas
 
