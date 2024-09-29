@@ -1,12 +1,18 @@
 package co.edu.uniquindio.poo;
-import javax.swing.JOptionPane;
-import java.util.InputMismatchException;
+
 import java.time.LocalDate;
+import java.util.InputMismatchException;
+
+import javax.swing.JOptionPane;
+
 public class Modulo {
-    public  String ingresarStringMensaje(String mensaje) {
+
+    //METODO PARA INGRESAR UN MENSAJE 
+    public String ingresarStringMensaje(String mensaje) {
         return JOptionPane.showInputDialog(mensaje);
     }
-    // Método para ingresar un entero
+
+    // METODO PARA INGRESAR UN ENTERO
     public int ingresarEntero(String mensaje) {
         int entero = 0;
         boolean repetir = true;
@@ -21,7 +27,10 @@ public class Modulo {
             }
         }
         return entero;
-    }public double ingresarDouble(String mensaje) {
+    }
+
+    //METODO PARA INGRESAR UN DOUBLE
+    public double ingresarDouble(String mensaje) {
         double real = 0;
         boolean repetir = true;
         while (repetir) {
@@ -36,19 +45,23 @@ public class Modulo {
         }
         return real;
     }
-    public boolean ingresarEstado(){
+
+    //METODO PARA INGRESAR LA DISPONIBILIDAD DE UN LIBRO
+    public boolean ingresarEstado() {
         boolean estado = true;
         int n = JOptionPane.showConfirmDialog(
-            null,
-            "¿Esta disponible el libro?",
-            "confirmar estado",
-            JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION){
-                estado = false;
-            }
+                null,
+                "¿Esta disponible el libro?",
+                "confirmar estado",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.NO_OPTION) {
+            estado = false;
+        }
         return estado;
     }
-    public LocalDate ingresarFecha(String mensaje){
+
+    //METODO PARA INGRESAR UNA FECHA
+    public LocalDate ingresarFecha(String mensaje) {
         mostrarMensaje(mensaje);
         int dia = ingresarEntero("Ingrese el dia");
         int mes = ingresarEntero("Ingrese el mes");
@@ -57,15 +70,9 @@ public class Modulo {
         return fecha;
     }
 
-    public void mostrarMensaje(String mensaje){
+    //METODO PARA MOSTRAR UN MENSAJE (PRINT) 
+    public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    
 
-
-    
-   
-
-
-    
 }
