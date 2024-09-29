@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Libro {
 
-    private String titulo; 
+    private String titulo;
     private String codigo;
     private String isbn;
     private String autor;
@@ -14,7 +14,8 @@ public class Libro {
     private int unidadesDisponibles;
     private double valor;
 
-    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, boolean estado, int unidadesDisponibles, double valor){
+    //METODO CONSTRUCTOR DE LA CLASE Libro
+    public Libro(String titulo, String codigo, String isbn, String autor, String editorial, LocalDate fechaPublicacion, boolean estado, int unidadesDisponibles, double valor) {
         this.titulo = titulo;
         this.codigo = codigo;
         this.isbn = isbn;
@@ -23,7 +24,7 @@ public class Libro {
         this.fechaPublicacion = fechaPublicacion;
         this.estado = estado;
         this.valor = valor;
-     }
+    }
 
     public String getTitulo() {
         return titulo;
@@ -73,7 +74,6 @@ public class Libro {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-
     public int getUnidadesDisponibles() {
         return unidadesDisponibles;
     }
@@ -97,10 +97,11 @@ public class Libro {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
     @Override
     public String toString() {
-        return "Libro [Titulo = " + titulo + ", codigo = " + codigo + ", isbn = " + isbn + ", autor = " + autor + 
-        ", editorial = " + editorial + ", fecha de publicación = " + fechaPublicacion + ", estado = " + estado + 
-        ", unidades disponibles  = " + unidadesDisponibles + ", valor = " + valor + "]";
-    }    
+        return "Libro [Titulo = " + titulo + ", codigo = " + codigo + ", isbn = " + isbn + ", autor = " + autor
+                + ", editorial = " + editorial + ", fecha de publicación = " + fechaPublicacion + ", estado = " + estado
+                + ", unidades disponibles  = " + unidadesDisponibles + ", valor = " + valor + "]";
+    }
 }

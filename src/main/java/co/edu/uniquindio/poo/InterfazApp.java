@@ -3,8 +3,10 @@ package co.edu.uniquindio.poo;
 import javax.swing.JOptionPane;
 
 public class InterfazApp {
+
     Modulo metodos = new Modulo();
 
+    //CASOS DE SELECCION QUE PUEDE REALIZAR UN ESTUDIANTE
     public void manejarEstudianteSeleccion(String seleccionEstudiante2, Biblioteca biblioteca, InterfazApp interfaz,
             Estudiante estudianteSesion) {
         switch (seleccionEstudiante2) {
@@ -24,8 +26,9 @@ public class InterfazApp {
         }
     }
 
+    //PANEL Y MENU DE INICIO PARA UN USUARIO ESTUDIANTE
     public void estudianteInicio(Biblioteca biblioteca, InterfazApp interfaz) {
-        String[] inicioEstudiantes = { "", "Ingresar id" };
+        String[] inicioEstudiantes = {"", "Ingresar id"};
         String seleccionEstudiante = (String) JOptionPane.showInputDialog(null, "Seleccione una opción",
                 "Menú Principal",
                 JOptionPane.PLAIN_MESSAGE, null, inicioEstudiantes, inicioEstudiantes[0]);
@@ -36,7 +39,7 @@ public class InterfazApp {
                 boolean centinela = true;
 
                 String idEstudianteABuscar = metodos.ingresarStringMensaje("Ingrese el id del estudiante");
-                
+
                 for (Estudiante estudiante : biblioteca.getEstudiantes()) {
                     if (estudiante.getCedula().equals(idEstudianteABuscar)) {
 
@@ -45,14 +48,15 @@ public class InterfazApp {
                         centinela = false;
                     }
                 }
-                if(centinela){
+                if (centinela) {
                     metodos.mostrarMensaje("Estudiante no encontrado");
                 }
-                
+
                 break;
         }
     }
 
+    //CASOS DE SELECCION QUE PUEDE REALIZAR UN BIBLIOTECARIO
     public void manejarSeleccion(String seleccion, Biblioteca biblioteca, InterfazApp interfaz) {
         switch (seleccion) {
             case "Libros":
@@ -71,8 +75,9 @@ public class InterfazApp {
         }
     }
 
+    //PANEL QUE MUESTRA LAS OPCIONES A REALIZAR CON UN LIBRO
     public void manejarLibros(Biblioteca biblioteca) {
-        String[] opciones = { "", "Ver Libros", "Agregar Libro", "Eliminar Libro", "Volver" };
+        String[] opciones = {"", "Ver Libros", "Agregar Libro", "Eliminar Libro", "Volver"};
         String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione una opción", "Gestión de Libros",
                 JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         switch (seleccion) {
@@ -90,9 +95,10 @@ public class InterfazApp {
         }
     }
 
+    //PANEL QUE MUESTRA LAS OPCIONES A REALIZAR CON UN PRESTAMO
     public void manejarPrestamos(Biblioteca biblioteca) {
-        String[] opciones = { "", "Ver Prestamos", "Ver un prestamo", "Agregar Prestamo", "Eliminar Prestamo",
-                "Volver" };
+        String[] opciones = {"", "Ver Prestamos", "Ver un prestamo", "Agregar Prestamo", "Eliminar Prestamo",
+            "Volver"};
         String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione una opción", "Gestion de prestamos",
                 JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         switch (seleccion) {
@@ -113,9 +119,10 @@ public class InterfazApp {
         }
     }
 
+    //PANEL QUE MUESTRA LAS OPCIONES A REALIZAR CON UN ESTUDIANTE
     public void manejarEstudiantes(Biblioteca biblioteca) {
-        String[] opciones = { "", "Ver Estudiantes", "Ver Estudiante", "Agregar Estudiante", "Eliminar Estudiante",
-                "Ver Estudiante Con Mas Prestamos" };
+        String[] opciones = {"", "Ver Estudiantes", "Ver Estudiante", "Agregar Estudiante", "Eliminar Estudiante",
+            "Ver Estudiante Con Mas Prestamos"};
         String seleccion = (String) JOptionPane.showInputDialog(null, "Sellecione una opcion", "Gestion de estudinates",
                 JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         switch (seleccion) {
@@ -138,9 +145,10 @@ public class InterfazApp {
         }
     }
 
+    //PANEL QUE MUESTRA LAS OPCIONES A REALIZAR CON UN BIBLIOTECARIO
     public void manejarBibliotecarios(Biblioteca biblioteca) {
-        String[] opciones = { "", "Ver Bibliotecarios", "Ver Bibliotecario", "Agregar Bibliotecario", "Calcular Nomina",
-                "Obtener Sueldo", "Eliminar bibliotecario" };
+        String[] opciones = {"", "Ver Bibliotecarios", "Ver Bibliotecario", "Agregar Bibliotecario", "Calcular Nomina",
+            "Obtener Sueldo", "Eliminar bibliotecario"};
         String seleccion = (String) JOptionPane.showInputDialog(null, "Selecicone una opcion", "Gestion bibliotecarios",
                 JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         switch (seleccion) {

@@ -2,18 +2,24 @@ package co.edu.uniquindio.poo;
 
 import javax.swing.JOptionPane;
 
-/**
- * Hello world!
- *
+/* PROGRAMA DE BIBLIOTECA 
+
+ * PROGRAMACION I - 03D
+ * 
+ *        AUTORES
+ * 
+ * JOSE MANUEL RODRIGUEZ
+ * JUAN JOSE MARIN CARMONA
  */
 public class App {
+
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca("UQ");
         InterfazApp interfazApp = new InterfazApp();
         boolean continuar = true;
         while (continuar) {
 
-            String[] usuarios = { "", "Estudiante", "Bibliotecario" };
+            String[] usuarios = {"", "Estudiante", "Bibliotecario"};
             String usuarioEleccion = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario",
                     "Menú Principal", JOptionPane.PLAIN_MESSAGE, null, usuarios, usuarios[0]);
             switch (usuarioEleccion) {
@@ -21,8 +27,8 @@ public class App {
                     interfazApp.estudianteInicio(biblioteca, interfazApp);
 
                 case "Bibliotecario":
-                    String[] opcionesBibliotecario = { "", "Libros", "Prestamo", "Estudiantes", "Bibliotecarios",
-                            "Salir" };
+                    String[] opcionesBibliotecario = {"", "Libros", "Prestamo", "Estudiantes", "Bibliotecarios",
+                        "Salir"};
                     String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione una opción",
                             "Menú Principal",
                             JOptionPane.PLAIN_MESSAGE, null, opcionesBibliotecario, opcionesBibliotecario[0]);
