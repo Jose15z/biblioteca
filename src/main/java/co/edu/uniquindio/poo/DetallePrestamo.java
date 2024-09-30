@@ -4,7 +4,7 @@ public class DetallePrestamo {
 
     private int cantidad;
     private Libro libro;
-    double subtotal;
+    private double subtotal;
 
     //METODO CONSTRUCTOR DE LA CLASE DetallePrestamo
     public DetallePrestamo(int cantidad, Libro libro) {
